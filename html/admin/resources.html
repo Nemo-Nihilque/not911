@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>
+      Resources Admin
+    </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+  </head>
+  <body>
+    <h1>Resources Admin</h1>
+    <form method="POST" id="resourcesForm"
+      action="/admin/resource">
+      <input type="text" name="resource" placeholder="Resource name..."/>
+      <input type="tel" name="phone number" placeholder="Phone number..."/>
+      <input type="hidden" name="id" value=""/>
+      <select id="categorySelect" name="category">
+        <option value="default">Category</option>
+      </select>
+      <input type="text" name="city" placeholder="City"/>
+      <input type="text" name="state" placeholder="State"/>
+      <input type="submit" value="submit"/>
+      <input type="reset" value="cancel"/>
+    </form>
+    <script src="/js/resources.js"></script>
+  </body>
+</html>

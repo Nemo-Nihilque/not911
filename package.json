@@ -1,0 +1,16 @@
+{
+  "name": "not911",
+  "version": "1.0.0",
+  "description": "Node code for the not911 project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sagan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  }
+}
