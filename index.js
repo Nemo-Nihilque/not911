@@ -97,5 +97,24 @@ app.put('/admin/category', (req, res) =>{
 });
 
 
+/***************************************************
+ *  Resources
+ ***************************************************/
+
+app.post('/admin/resource', (req, res) => {
+  const db = new sqlite3.Database('not911.db');
+
+  let {resource, phoneNumber, category, city, state} = req.body;
+
+  db.serialize( () => {
+    let insert = db.prepare('INSERT INTO resources (name, phone_number, catagory, city, state) VALUES (?, ?, ?, ?, ?)');
+    insert.run(resource, phoneNumber, category, city, state);
+    insert.finalize();
+  });
+
+  db.close();
+  res.send('{}');
+});
+
 
 app.listen(3000);

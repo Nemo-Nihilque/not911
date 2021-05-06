@@ -1,8 +1,8 @@
 let resourceForm = document.forms.resourcesForm;
 let categorySelect = document.getElementById('categorySelect');
 
-document.forms.resourceForm.addEventListener('submit', submitHandler);
-document.forms.resourceForm.addEventListener('reset', resetHandler);
+document.forms.resourcesForm.addEventListener('submit', submitHandler);
+document.forms.resourcesForm.addEventListener('reset', resetHandler);
 
 fetch('/admin/category')
   .then(response => response.json())
@@ -24,10 +24,16 @@ function submitHandler (submitEvent) {
   submitEvent.preventDefault();
 
   let form = submitEvent.target;
+  let { category, resource, phoneNumber, city, state } = form.elements;
+  let method = 'POST';
 
-  let { category, name, phoneNumber, city, state } = form.elements;
-
-  let method, payload;
+  let payload = {
+    category: category.value,
+    resource: resource.value,
+    phoneNumber: phoneNumber.value,
+    city: city.value,
+    state: state.value
+  };
   
   fetch('/admin/resource', {
     method,
@@ -35,12 +41,16 @@ function submitHandler (submitEvent) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
-  }).then(response =. response.json())
-    .then(data =. writeCategory(list, data));
+  }).then(response => response.json())
+    .then(data => writeResources([], data));
   form.reset();
 
 }
     
+function writeResources(resourceList, data){
+  
+}
+
 function resetHandler (resetEvent) {
   
 }
