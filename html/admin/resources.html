@@ -8,18 +8,29 @@
   </head>
   <body>
     <h1>Resources Admin</h1>
-    <form method="POST" id="resourcesForm"
-      action="/admin/resource">
-      <input type="text" name="resource" placeholder="Resource name..."/>
-      <input type="tel" name="phoneNumber" placeholder="Phone number..."/>
-      <input type="hidden" name="id" value=""/>
-      <select id="categorySelect" name="category">
-        <option value="default">Category</option>
-      </select>
-      <input type="text" name="city" placeholder="City"/>
-      <input type="text" name="state" placeholder="State"/>
-      <input type="submit" value="submit"/>
-      <input type="reset" value="cancel"/>
+    <form method="POST" id="resourcesForm" action="/admin/resource">
+      <fieldset>
+        <input type="text" name="resource" required minlength="3" maxlength="100" placeholder="Resource name..."/>
+      </fieldset>
+      <fieldset>
+        <input type="tel" name="phoneNumber" required
+                          pattern="\(\d{3}\)\s*\d{3}-\d{4}" placeholder="(012) 345-6789"/>
+      </fieldset>
+      <fieldset>
+        <select id="categorySelect" required name="category">
+          <option>Category</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <input type="text" name="city" required pattern="[a-zA-Z\.\-'\s,]+" maxlength="50" placeholder="City"/>
+        <input type="text" name="state" required pattern="[a-zA-Z]{2}" size="5"
+               maxlength="2" placeholder="State"/>
+      </fieldset>
+      <fieldset>
+        <input type="hidden" name="id" value=""/>
+        <input type="submit" value="submit"/>
+        <input type="reset" value="cancel"/>
+      </fieldset>
     </form>
     <script src="/js/resources.js"></script>
   </body>

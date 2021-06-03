@@ -18,3 +18,11 @@ ul li a {
   right: 1px;
   top: 1px;
 }
+
+fieldset {
+  border: none;
+}
+
+input:invalid, select:invalid {
+  border-color: red;
+}
