@@ -94,8 +94,53 @@ app.put('/admin/category', (req, res) =>{
   getCategories().then(rows => {
     res.send(rows);
   });
-});
+})
 
+
+/***************************************************
+ *  Resources
+ ***************************************************/
+
+app.post('/admin/resource', (req, res) => {
+  const db = new sqlite3.Database('not911.db');
+  function checkField (pattern, field, message) {
+    if(!pattern.test(field)) {
+      res.status(400).send(message);
+      db.close();
+      res.end();
+      
+      return true;
+    }
+    return false;
+  }
+
+  let {resource, phoneNumber, category, city, state} = req.body;
+
+  let reResource = /^[a-zA-Z\.\-'\s,0-9]{3,50}$/;
+  let rePhoneNumber = /^\(\d{3}\)\s*\d{3}-\d{4}$/;
+  let reCategory = /^[0-9]+$/;
+  let reCity = /^[a-zA-Z\.\-'\s,]{1,50}$/;
+  let reState = /^[a-zA-Z]{2}$/;
+
+  if(
+    checkField(reResource, resource, 'Resource name must be 3-100 characters') ||
+    checkField(rePhoneNumber, phoneNumber, 'Phone number must follow the formatting "(111) 222-3333"') ||
+    checkField(reCategory, category, 'Please select a valid category') ||
+    checkField(reCity, city, 'City names can only contain the characters a-z, symbols, amd must be 1-50 characters in length') ||
+    checkField(reState, state, 'Please enter a 2 letter state')
+  ) {
+    return;
+  }
+ 
+  db.serialize( () => {
+    let insert = db.prepare('INSERT INTO resources (name, phone_number, catagory, city, state) VALUES (?, ?, ?, ?, ?)');
+    insert.run(resource, phoneNumber, category, city, state);
+    insert.finalize();
+  });
+
+  db.close();
+  res.send('{}');
+});
 
 
 app.listen(3000);
