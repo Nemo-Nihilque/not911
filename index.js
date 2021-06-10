@@ -131,42 +131,7 @@ app.post('/admin/resource', (req, res) => {
   ) {
     return;
   }
-
-  /*if(!reResource.test(resource)){
-    res.status(400).send('Resource name must be 3-100 characters');
-    db.close();
-    res.end()
-    return;
-  }
-
-  if (!rePhoneNumber.test(phoneNumber)) {
-    res.status(400).send('Phone number must follow the formatting "(111) 222-3333"');
-    db.close();
-    res.end()
-    return;
-  }
-
-  if (!reCategory.test(category)) {
-    res.status(400).send('Please select a valid category');
-    db.close();
-    res.end()
-    return;
-  }
-
-  if (!reCity.test(city)) {
-    res.status(400).send('City names can only contain characters a-z, symbols, and must be 1-50 characters in length');
-    db.close();
-    res.end()
-    return;
-  }
-
-  if (!reState.test(state)) {
-    res.status(400).send('Please enter a 2 letter state');
-    db.close();
-    res.end()
-    return;
-  }*/
-
+ 
   db.serialize( () => {
     let insert = db.prepare('INSERT INTO resources (name, phone_number, catagory, city, state) VALUES (?, ?, ?, ?, ?)');
     insert.run(resource, phoneNumber, category, city, state);
